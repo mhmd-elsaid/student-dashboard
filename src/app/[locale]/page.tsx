@@ -12,6 +12,7 @@ export default function HomePage() {
           Access your courses, assignments, and track your progress.
         </p>
         <div className="space-x-4">
+          
           <Link
             href="/courses"
             className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700"
@@ -23,6 +24,12 @@ export default function HomePage() {
             className="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
           >
             View Assignments
+          </Link>
+          <Link
+            href="/login"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+          >
+            Login
           </Link>
         </div>
       </div>

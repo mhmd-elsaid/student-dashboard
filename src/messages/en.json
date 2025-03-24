@@ -1,0 +1,37 @@
+{
+  "auth": {
+    "title": "Sign In",
+    "socialLogin": {
+      "google": "Continue with Google",
+      "facebook": "Continue with Facebook"
+    },
+    "or": "OR",
+    "form": {
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email",
+        "required": "Email is required",
+        "invalid": "Invalid email address"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password",
+        "required": "Password is required",
+        "show": "Show password",
+        "hide": "Hide password"
+      },
+      "forgotPassword": "Forgot your password?",
+      "submit": {
+        "default": "Sign in",
+        "loading": "Signing in..."
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Invalid login credentials"
+    },
+    "register": {
+      "prompt": "Don't have an account?",
+      "link": "Sign up"
+    }
+  }
+} 

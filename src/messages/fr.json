@@ -1,0 +1,37 @@
+{
+  "auth": {
+    "title": "Se connecter",
+    "socialLogin": {
+      "google": "Continuer avec Google",
+      "facebook": "Continuer avec Facebook"
+    },
+    "or": "OU",
+    "form": {
+      "email": {
+        "label": "Adresse e-mail",
+        "placeholder": "Entrez votre e-mail",
+        "required": "L'e-mail est requis",
+        "invalid": "Adresse e-mail invalide"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Entrez votre mot de passe",
+        "required": "Le mot de passe est requis",
+        "show": "Afficher le mot de passe",
+        "hide": "Masquer le mot de passe"
+      },
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": {
+        "default": "Se connecter",
+        "loading": "Connexion en cours..."
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Identifiants de connexion invalides"
+    },
+    "register": {
+      "prompt": "Vous n'avez pas de compte ?",
+      "link": "S'inscrire"
+    }
+  }
+} 

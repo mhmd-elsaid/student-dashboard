@@ -66,7 +66,7 @@ export const LoginForm = () => {
         </div>
 
         {/* Social Login Buttons */}
-        <div className="space-y-4">
+        <div className="space-y-4 hidden">
           <button 
             type="button"
             className="w-full flex items-center justify-center gap-3 px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors relative"
@@ -92,7 +92,7 @@ export const LoginForm = () => {
         </div>
 
         {/* OR Divider */}
-        <div className="relative my-8">
+        <div className="relative my-8 hidden">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
@@ -102,7 +102,7 @@ export const LoginForm = () => {
         </div>
 
         {/* Login Form */}
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {/* Email Input */}
           <div>
             <div className="relative">
@@ -117,7 +117,7 @@ export const LoginForm = () => {
                 type="email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder={t('form.email.placeholder')}
-                dir="auto"
+                dir="ltr"
               />
               <div className="absolute end-3 top-3 text-gray-400">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

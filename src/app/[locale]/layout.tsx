@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode } from 'react';
 import { locales } from '../i18n';
+import { AuthProvider } from '../../lib/AuthContext';
+import { RouteGuard } from '../../components/RouteGuard';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,7 +33,11 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <AuthProvider>
+            <RouteGuard>
+              {children}
+            </RouteGuard>
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

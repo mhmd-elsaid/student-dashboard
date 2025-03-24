@@ -1,9 +1,11 @@
 import {getRequestConfig} from 'next-intl/server';
 import {locales, defaultLocale} from '../app/i18n';
 
-export default getRequestConfig(async ({locale}) => {
+export type Locale = 'en' | 'ar';
+
+export default getRequestConfig(async ({locale}: {locale?: string}) => {
   // Validate that the incoming locale is valid
-  if (!locales.includes(locale)) {
+  if (!locale || !locales.includes(locale)) {
     locale = defaultLocale;
   }
   

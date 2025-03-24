@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { useRouter } from 'next/navigation';
+import { login } from '../../lib/auth';
 
 interface LoginFormData {
   email: string;
@@ -12,12 +14,13 @@ interface LoginFormData {
 }
 
 export const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
   
   // Initialize translations
   const t = useTranslations('auth');
+  const router = useRouter();
   
   const {
     register,
@@ -30,24 +33,30 @@ export const LoginForm = () => {
     setError(null);
     
     try {
-      // Simulating API call
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-
-      const result = await response.json();
-      console.log('Login successful:', result);
+      // Call login function directly
+      const result = await login(data.email, data.password);
       
-    } catch (err) {
-      setError(t('errors.invalidCredentials'));
+      if (result.success && result.token && result.user) {
+        // Store token and user in localStorage
+        localStorage.setItem('auth_token', result.token);
+        localStorage.setItem('auth_user', JSON.stringify(result.user));
+        
+        // Also make an API call to set the cookie
+        await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        
+        // Redirect to home page
+        router.push('/');
+      } else {
+        setError(result.message || 'Invalid email or password');
+      }
+    } catch (error) {
+      setError('An error occurred during login');
     } finally {
       setIsLoading(false);
     }

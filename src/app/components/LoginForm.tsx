@@ -6,14 +6,14 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useRouter } from 'next/navigation';
-import { login } from '../../lib/auth';
+import { useAuth } from '@/lib/AuthContext'; // Update the import path for AuthContext
 
 interface LoginFormData {
   email: string;
   password: string;
 }
 
-export const LoginForm = () => {
+export const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,8 @@ export const LoginForm = () => {
   // Initialize translations
   const t = useTranslations('auth');
   const router = useRouter();
-  
+  const { login: authContextLogin } = useAuth(); // Update the authentication flow
+
   const {
     register,
     handleSubmit,
@@ -33,27 +34,32 @@ export const LoginForm = () => {
     setError(null);
     
     try {
-      // Call login function directly
-      const result = await login(data.email, data.password);
+      // Use the AuthContext login function which properly updates the authentication state
+      const authSuccess = await authContextLogin(data.email, data.password);
       
-      if (result.success && result.token && result.user) {
-        // Store token and user in localStorage
-        localStorage.setItem('auth_token', result.token);
-        localStorage.setItem('auth_user', JSON.stringify(result.user));
+      if (authSuccess) {
+        console.log('Login successful');
         
-        // Also make an API call to set the cookie
-        await fetch('/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
+        // Make an API call to set the cookie if needed
+        try {
+          await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+        } catch (error) {
+          console.error('Error setting cookie:', error);
+          // Continue even if cookie setting fails
+        }
         
-        // Redirect to home page
-        router.push('/');
+        // Give a small delay to ensure state is updated before navigation
+        setTimeout(() => {
+          router.push('/');
+        }, 300);
       } else {
-        setError(result.message || 'Invalid email or password');
+        setError('Login failed. Please try again.');
       }
     } catch (error) {
       setError('An error occurred during login');

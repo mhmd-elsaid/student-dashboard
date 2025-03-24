@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/lib/AuthContext';
 
 const navigation = [
   { name: 'Dashboard', href: '/' },
@@ -12,6 +13,12 @@ const navigation = [
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { isAuthenticated } = useAuth();
+
+  // Don't render navigation if user is not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <nav className="bg-white shadow">
@@ -19,7 +26,7 @@ export default function Navigation() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <span className="text-xl font-bold text-primary-600">Student Dashboard</span>
+              <span className="text-xl font-bold text--600">Student Dashboard</span>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               {navigation.map((item) => {
@@ -44,4 +51,4 @@ export default function Navigation() {
       </div>
     </nav>
   );
-} 
+}

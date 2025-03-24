@@ -57,18 +57,9 @@ export const LoginForm = () => {
     <div className="min-h-screen flex items-center justify-center p-4 bg-white relative">
       <LanguageSwitcher />
       <div className="w-full max-w-md space-y-8 p-8 rounded-lg">
-        {/* Close button */}
-        <div className="text-right">
-          <button className="text-gray-500 hover:text-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
 
         {/* Form Header */}
-        <div className="text-right">
+        <div className="text-start">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">
             {t('title')}
           </h1>
@@ -128,7 +119,7 @@ export const LoginForm = () => {
                 placeholder={t('form.email.placeholder')}
                 dir="auto"
               />
-              <div className="absolute left-3 top-3 text-gray-400">
+              <div className="absolute end-3 top-3 text-gray-400">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
                 </svg>
@@ -154,7 +145,7 @@ export const LoginForm = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute left-3 top-3 text-gray-400"
+                className="absolute end-3 top-3 text-gray-400"
                 aria-label={showPassword ? t('form.password.hide') : t('form.password.show')}
               >
                 {showPassword ? (
